@@ -41,7 +41,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Линтер
-        run: flake8 webpython --exclude migrations --ignore E501,F401,E302,W293,W391,W292
+        run: flake8 stocks_products --exclude migrations --ignore E501,F401,E302,W293,W391,W292
 
       - name: Тесты
         run: python stocks_products/manage.py test
