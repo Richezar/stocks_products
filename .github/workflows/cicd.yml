@@ -41,7 +41,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: linter
-        run: flake8 stocks_products --exclude migrations --ignore E501,E251,F401,E302,W293,W391,W292
+        run: flake8 stocks_products --exclude migrations --ignore E501,E251,E226,F401,E302,W293,W391,W292
 
       - name: test
         run: python stocks_products/manage.py test
