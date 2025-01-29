@@ -29,21 +29,21 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: Проверка изменений
+      - name: checkout
         uses: actions/checkout@v2
 
-      - name: Установка Python
+      - name: python
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
 
-      - name: Установка зависимостей
+      - name: pip
         run: pip install -r requirements.txt
 
-      - name: Линтер
+      - name: linter
         run: flake8 stocks_products --exclude migrations --ignore E501,E251,F401,E302,W293,W391,W292
 
-      - name: Тесты
+      - name: test
         run: python stocks_products/manage.py test
         env:
           PG_NAME: ${{ env.PG_NAME }}
@@ -56,12 +56,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: testing
     steps:
+      - name: set up ssh
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           script: |
             cd /root/webserver-test/stocks_products/
             git pull
