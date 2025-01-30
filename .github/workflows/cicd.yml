@@ -44,7 +44,7 @@ jobs:
         run: flake8 stocks_products --exclude migrations --ignore E501,E251,E226,F401,E302,W293,W391,W292
 
       - name: tests
-        run: python stocks_products/manage.py test
+        run: python stocks_products/manage.py test logistic
         env:
           PG_NAME: ${{ env.PG_NAME }}
           PG_USER: ${{ env.PG_USER }}
@@ -56,17 +56,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: testing
     steps:
-#      - name: set up ssh
-#        uses: webfactory/ssh-agent@v0.5.3
-#        with:
-#          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: set up ssh
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: add GitHub to known_hosts
+        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /root/webserver-test/stocks_products/
             git pull git@github.com:Richezar/stocks_products.git
