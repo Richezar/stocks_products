@@ -71,5 +71,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /root/webserver-test/stocks_products/
-            git pull origin main
+            git pull origin main git@github.com:Richezar/stocks_products.git
             sudo systemctl restart gunicorn
