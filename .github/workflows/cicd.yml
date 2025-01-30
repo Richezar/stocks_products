@@ -60,8 +60,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: add GitHub to known_hosts
-        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
