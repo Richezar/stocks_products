@@ -66,4 +66,3 @@ jobs:
             cd /root/webserver-test/stocks_products
             git pull origin main
             sudo systemctl restart gunicorn
-# -_-
