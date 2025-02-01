@@ -38,7 +38,7 @@ jobs:
           python-version: 3.12
 
       - name: pip
-        run: pip install -r requirements.txt
+        run: pip install -r stocks_products/requirements.txt
 
       - name: linter
         run: flake8 stocks_products --exclude migrations --ignore E501,E251,E226,F401,E302,W293,W391,W292
