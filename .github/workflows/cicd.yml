@@ -68,6 +68,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /webserver-test/stocks_products/
+            cd /root/webserver-test/stocks_products/
             git pull origin main git@github.com:Richezar/stocks_products.git
             sudo systemctl restart gunicorn
