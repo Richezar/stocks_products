@@ -63,6 +63,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd /root/webserver-test/stocks_products
+            cd /root/stocks_products/stocks_products
             git pull origin main
             sudo systemctl restart gunicorn
